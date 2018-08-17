@@ -6,9 +6,29 @@
 		<link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-			<img id="image" src="images/porao.jpg">
-    	<canvas id="canvas"></canvas>
-    <!-- <script src="js/gamma.js"></script> -->
-    <script src="js/thresholding.js"></script>
+      <select id="img">
+          <option value="escada">Escada</option>
+          <option value="porao">Porão</option>
+          <option value="ponte">Ponte</option>
+        </select>
+        <select id="processing">
+            <option value="1">Gamma</option>
+            <option value="2">Thresholding</option>
+            <option value="3">Averaging</option>
+            <option value="4">Contrast</option>
+            <option value="5">Median</option>
+          </select>
+          <input class="btn-run" type="submit" value="Run">
+      <div>
+        <h3>Antes:</h3>
+        <img id="image" src="">
+      </div>
+      <div>
+        <h3>Depois:</h3>
+        <canvas id="canvas"></canvas>
+      </div>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="js/functions.js"></script>
+    <script src="js/index.js"></script>
   </body>
 </html>
