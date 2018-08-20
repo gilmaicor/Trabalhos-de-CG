@@ -14,9 +14,11 @@ $( document ).delegate( ".btn-run", "click", function() {
   ctx.drawImage(img, 0, 0)
   console.log(processing)
 
+  img = toGray(img, cnv, ctx)
+
   switch ( processing ) {
     case '1':
-        img.onload = gammaCorrection( cnv, ctx );
+        img.onload = gammaCorrection(toGray);
         console.log('ok')
         break;
     case '2':

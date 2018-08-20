@@ -1,9 +1,9 @@
-var mouseX = 0, mouseY = 0,
+let mouseX = 0, mouseY = 0,
 
 windowHalfX = window.innerWidth / 2,
 windowHalfY = window.innerHeight / 2,
 
-SEPARATION = 200,
+SEPARATION = 300,
 AMOUNTX = 10,
 AMOUNTY = 10,
 
@@ -11,11 +11,10 @@ camera, scene, renderer;
 
 init();
 animate();
-console.log(color())
 
 function init() {
 
-	var container, separation = 100, amountX = 50, amountY = 50,
+	let container, separation = 100, amountX = 50, amountY = 50,
 	particles, particle;
 
 	container = document.createElement('div');
@@ -25,6 +24,7 @@ function init() {
 	camera.position.z = 100;
 
 	scene = new THREE.Scene();
+	scene.background = new THREE.Color( 0xffffff );
 
 	renderer = new THREE.CanvasRenderer();
 	renderer.setPixelRatio( window.devicePixelRatio );
@@ -34,7 +34,7 @@ function init() {
 	// color
 
 	function color() {
-		var value = Math.floor(Math.random() * (16000000 - 100)) + 100;
+		let value = Math.floor(Math.random() * (16000000 - 500)) + 500;
 		return '#' + value.toString(16);
 	}
 
@@ -42,8 +42,8 @@ function init() {
 
 	// particles
 
-	var PI2 = Math.PI * 2;
-	var material = new THREE.SpriteCanvasMaterial( {
+	let PI2 = Math.PI * 2;
+	let material = new THREE.SpriteCanvasMaterial( {
 
 		color: color(),
 		program: function ( context ) {
@@ -56,11 +56,28 @@ function init() {
 
 	} );
 
-	var points = [];
+	function ball(){
+		let PI2 = Math.PI * 2;
+		let material = new THREE.SpriteCanvasMaterial( {
 
-	for ( var i = 0; i < 500; i ++ ) {
+		color: color(),
+		program: function ( context ) {
 
-		particle = new THREE.Sprite( material );
+					context.beginPath();
+					context.arc( 0, 0, 0.5, 0, PI2, true );
+					context.fill();
+
+				}
+		} );
+
+		return material
+	}
+
+	let points = [];
+
+	for ( let i = 0; i < 500; i ++ ) {
+
+		let particle = new THREE.Sprite( ball() );
 		particle.position.x = Math.random() * 2 - 1;
 		particle.position.y = Math.random() * 2 - 1;
 		particle.position.z = Math.random() * 2 - 1;
@@ -75,7 +92,7 @@ function init() {
 
 	// geometry
 
-	var geometry = new THREE.BufferGeometry().setFromPoints( points );
+	let geometry = new THREE.BufferGeometry().setFromPoints( points );
 
 	scene.add( geometry );
 

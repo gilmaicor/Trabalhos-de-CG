@@ -14,3 +14,8 @@ canvas {
   align-items: center;
   text-align: center;
 }
+
+#image, #canvas {
+  border: 5px;
+  border-color: blue
+}
