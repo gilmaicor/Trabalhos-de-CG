@@ -2,34 +2,23 @@
 <html>
   <head>
     <meta charset="utf-8">
-		<meta name="viewport" content="width=device-width">
-		<link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width">
+    <title>CG</title>
+    <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-      <select id="img">
-          <option value="escada">Escada</option>
-          <option value="porao">Porão</option>
-          <option value="ponte">Ponte</option>
-        </select>
-        <select id="processing">
-            <option value="1">Gamma</option>
-            <option value="2">Thresholding</option>
-            <option value="3">Averaging</option>
-            <option value="4">Contrast</option>
-            <option value="5">Median</option>
-          </select>
-          <input class="btn-run" type="submit" value="Run">
-          <a href="https://github.com/gilmaicor/Trabalhos-de-CG">Relatório e Código Fonte no GitHub</a>
-      <div>
-        <h3>Antes:</h3>
-        <img id="image" src="">
-      </div>
-      <div>
-        <h3>Depois:</h3>
-        <canvas id="canvas"></canvas>
-      </div>
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="js/functions.js"></script>
-    <script src="js/index.js"></script>
+      <script src="js/three.js"></script>
+      <script src="js/Projector.js"></script>
+      <script src="js/CanvasRenderer.js"></script>
+      <script src="js/balls.js"></script>
+    <div class="row centered">
+          <h3>Trabalhos de Computação Gráfica</h3>
+          <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action" href="filters.html" role="tab">Filtros</a>
+            <a class="list-group-item list-group-item-action" href="alphaComposition.html" role="tab">Composição de Alfa</a>
+            <a class="list-group-item list-group-item-action list-group-item-light" href="https://github.com/gilmaicor/Trabalhos-de-CG" role="tab" aria-controls="messages">Relatórios e Código Fonte</a>
+        </div>
+    <link rel="stylesheet" href="css/bootstrap.min.css" >
+    <script src="js/bootstrap.min.js" ></script>
   </body>
 </html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>CG</title>
+		<link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <div class="centered">
+      <div class="row">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text">Imagens</label>
+          </div>
+          <select class="custom-select" id="img">
+            <option value="escada">Escada</option>
+            <option value="porao">Porão</option>
+            <option value="ponte">Ponte</option>
+          </select>
+        </div>
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text">Filtros</label>
+          </div>
+          <select class="custom-select" id="processing">
+              <option value="1">Gamma</option>
+              <option value="2">Thresholding</option>
+              <option value="3">Averaging</option>
+              <option value="4">Contrast</option>
+              <option value="5">Median</option>
+          </select>
+        </div>
+      </div>
+        
+      <input type="button" id="btn-run" class="btn-run btn btn-outline-primary" value="Run">
+      <h6>Pode ser necessário clicar duas vezes</h6>
+
+    <div class="row">
+      <div class="mb-6">
+        <h3>Antes:</h3>
+        <img id="image" src="">
+      </div>
+      <div class="mb-6">
+        <h3>Depois:</h3>
+        <canvas id="canvas"></canvas>
+      </div>
+    </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/index.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css" >
+    <script src="js/bootstrap.min.js" ></script>
+  </body>
+</html>

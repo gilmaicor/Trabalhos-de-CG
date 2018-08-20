@@ -1,15 +1,23 @@
 {
-  "name": "Trabalhos_De_CG",
+  "name": "Trabalhos-de-CG",
   "version": "1.0.0",
-  "description": "",
+  "description": "## Relatórios:",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gilmaicor/Trabalhos-de-CG.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "bugs": {
+    "url": "https://github.com/gilmaicor/Trabalhos-de-CG/issues"
+  },
+  "homepage": "https://github.com/gilmaicor/Trabalhos-de-CG#readme",
+  "dependencies": {
     "http-server": "^0.11.1"
   }
 }

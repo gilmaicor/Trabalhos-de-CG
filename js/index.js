@@ -1,4 +1,4 @@
-$( document ).delegate( ".btn-run", "click", image, function() {
+$( document ).delegate( ".btn-run", "click", function() {
 
   let image = "images/" + $( "#img option:selected" ).val() + ".jpg"
   let processing = $( "#processing option:selected" ).val()
@@ -17,6 +17,7 @@ $( document ).delegate( ".btn-run", "click", image, function() {
   switch ( processing ) {
     case '1':
         img.onload = gammaCorrection( cnv, ctx );
+        console.log('ok')
         break;
     case '2':
         img.onload = thresholding( cnv, ctx );
