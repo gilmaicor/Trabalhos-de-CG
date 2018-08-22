@@ -38,23 +38,7 @@ function init() {
 		return '#' + value.toString(16);
 	}
 
-	//
-
 	// particles
-
-	let PI2 = Math.PI * 2;
-	let material = new THREE.SpriteCanvasMaterial( {
-
-		color: color(),
-		program: function ( context ) {
-
-			context.beginPath();
-			context.arc( 0, 0, 0.5, 0, PI2, true );
-			context.fill();
-
-		}
-
-	} );
 
 	function ball(){
 		let PI2 = Math.PI * 2;

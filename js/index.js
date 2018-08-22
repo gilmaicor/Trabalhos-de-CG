@@ -1,36 +1,75 @@
-$( document ).delegate( ".btn-run", "click", function() {
+$( document ).delegate( ".btn-run1", "click", function() {
+	
+	let image = "images/" + $( "#img option:selected" ).val() + ".jpg"
+	let processing = $( "#processing option:selected" ).val()
+	$( "#image" ).attr('src', image);
+	
+	let img = document.getElementById("image")
+	let cnv = document.getElementById("canvas")
+	let ctx = cnv.getContext('2d')
+	
+	cnv.width = Math.max(1, Math.floor(img.width))
+	cnv.height = Math.max(1, Math.floor(img.height))
+	
+	ctx.drawImage(img, 0, 0)
+	console.log(processing)
+	
+	switch ( processing ) {
+		case '1':
+		  gammaCorrection( cnv, ctx );
+		  break;
+		case '2':
+		  thresholding( cnv, ctx );
+		  break;
+		case '3':
+		  averagingFilter( cnv, ctx );
+		  break;
+		case '4':
+		  contrast( cnv, ctx );
+		  break;
+		case '5':
+		  medianFilter( cnv, ctx );
+	}
+	
+});
 
-  let image = "images/" + $( "#img option:selected" ).val() + ".jpg"
-  let processing = $( "#processing option:selected" ).val()
-  $( "#image" ).attr('src', image);
+$( document ).delegate( ".btn-run2", "click", function() {
+	
+	let background = document.getElementById("background")
+	
+	let cnv = document.getElementById("canvas")
+	let ctxb = cnv.getContext('2d')
+	
+	
+	cnv.width = Math.max(1, Math.floor(background.width))
+	cnv.height = Math.max(1, Math.floor(background.height))
+	
+	ctxb.drawImage(background, 0, 0)
+	
+	let imageDataBack = ctxb.getImageData( 0, 0, cnv.width, cnv.height )
+  
 
-  let img = document.getElementById("image")
-  let cnv = document.getElementById("canvas")
-  let ctx = cnv.getContext('2d')
+  for (i = 0; i < imageDataBack.height; i++) {
+    for (j = 0; j < imageDataBack.width; j++) {
 
-  cnv.width = Math.max(1, Math.floor(img.width))
-  cnv.height = Math.max(1, Math.floor(img.height))
+      var pixel = parseInt(j + imageDataBack.width * i) * 4
 
-  ctx.drawImage(img, 0, 0)
-  console.log(processing)
+      for (k = 0; k < 3; k++) {
 
-  img = toGray(img, cnv, ctx)
+        var color = imageDataBack.data[pixel+k]
 
-  switch ( processing ) {
-    case '1':
-        img.onload = gammaCorrection(toGray);
-        console.log('ok')
-        break;
-    case '2':
-        img.onload = thresholding( cnv, ctx );
-        break;
-    case '3':
-        img.onload = averagingFilter( cnv, ctx );
-        break;
-    case '4':
-        img.onload = contrast( cnv, ctx );
-        break;
-    case '5':
-        img.onload = medianFilter( cnv, ctx );
+        if ( color < 127 ) {
+          imageDataBack.data[pixel+k] = 0
+        } else {
+          imageDataBack.data[pixel+k] = 255
+        }
+
+      }
+    }
   }
+  
+  ctxb.putImageData(imageDataBack, 0, 0, 0, 0, imageDataBack.width, imageDataBack.height)
+  console.log("Thresholding")
+  return cnv.toDataURL()
+	
 });

@@ -15,7 +15,11 @@ canvas {
   text-align: center;
 }
 
-#image, #canvas {
+img, canvas {
   border: 5px;
-  border-color: blue
+  border-color: blue;
+}
+
+.top {
+  margin-top: 20px;
 }

@@ -1,120 +1,145 @@
-  function gammaCorrection( cnv, ctx ) {
-    
-    let gamma = 0.5
-    let correction = 1 / gamma
+function gammaCorrection( cnv, ctx ) {
   
-    let pixels = ctx.getImageData( 0, 0, cnv.width, cnv.height )
-  
-    for (i = 0; i < pixels.height; i++) {
-      for (j = 0; j < pixels.width; j++) {
-          let pixel = parseInt(j + pixels.width * i) * 4
-          pixels.data[pixel] = Math.pow((pixels.data[pixel] / 255), correction) * 255;
+  var gamma = 0.5
+  var correction = 1 / gamma
+
+  var imageData = ctx.getImageData( 0, 0, cnv.width, cnv.height )
+
+  for (i = 0; i < imageData.height; i++) {
+    for (j = 0; j < imageData.width; j++) {
+
+      var pixel = parseInt(j + imageData.width * i) * 4
+
+      for (k = 0; k < 3; k++) {
+
+        imageData.data[pixel+k] = Math.pow((imageData.data[pixel+k]/255), correction) * 255;
+
       }
     }
-    
-    ctx.putImageData(pixels, 0, 0, 0, 0, pixels.width, pixels.height)
-    console.log("gammaCorrection")
-    return cnv.toDataURL()
-
   }
-
-  function thresholding( cnv, ctx ) {
-
-    let pixels = ctx.getImageData( 0, 0, cnv.width, cnv.height )
-
-    for (i = 0; i < pixels.height; i++) {
-      for (j = 0; j < pixels.width; j++) {
-        let pixel = parseInt(j + pixels.width * i) * 4
   
-        if ( pixels.data[pixel] < 127 ) pixels.data[pixel] = 0
-        else pixels.data[pixel] = 255
+  ctx.putImageData(imageData, 0, 0, 0, 0, imageData.width, imageData.height)
+  console.log("gammaCorrection")
+  return cnv.toDataURL()
+
+}
+
+function thresholding( cnv, ctx ) {
+
+  var imageData = ctx.getImageData( 0, 0, cnv.width, cnv.height )
+  
+
+  for (i = 0; i < imageData.height; i++) {
+    for (j = 0; j < imageData.width; j++) {
+
+      var pixel = parseInt(j + imageData.width * i) * 4
+
+      for (k = 0; k < 3; k++) {
+
+        var color = imageData.data[pixel+k]
+
+        if ( color < 127 ) {
+          imageData.data[pixel+k] = 0
+        } else {
+          imageData.data[pixel+k] = 255
+        }
+
       }
     }
-    
-    ctx.putImageData(pixels, 0, 0, 0, 0, pixels.width, pixels.height)
-    console.log("Thresholding")
-    return cnv.toDataURL()
-
   }
-
-  function averagingFilter( cnv, ctx ) {
   
-    let pixels = ctx.getImageData( 0, 0, cnv.width, cnv.height )
-  
-    for (i = 1; i < pixels.height - 1; i++) {
-      for (j = 1; j < pixels.width - 1; j++) {
+  ctx.putImageData(imageData, 0, 0, 0, 0, imageData.width, imageData.height)
+  console.log("Thresholding")
+  return cnv.toDataURL()
 
-          let pixel = parseInt((j-1) + pixels.width * (i-1)) * 4
-          
-          let somaTotal = pixels.data[parseInt((j-1) + pixels.width * (i-1)) * 4] + pixels.data[parseInt((j-1) + pixels.width * i) * 4] + pixels.data[parseInt((j-1) + pixels.width * (i+1)) * 4] + pixels.data[parseInt(j + pixels.width * (i-1)) * 4] + pixels.data[parseInt(j + pixels.width * i) * 4] + pixels.data[parseInt(j + pixels.width * (i+1)) * 4] + pixels.data[parseInt((j+1) + pixels.width * (i-1)) * 4] + pixels.data[parseInt((j+1) + pixels.width * i) * 4] + pixels.data[parseInt((j+1) + pixels.width * (i+1)) * 4]
+}
 
-          let median = parseInt( somaTotal / 9 )
-          pixels.data[pixel] = median
+function averagingFilter( cnv, ctx ) {
+
+  var imageData = ctx.getImageData( 0, 0, cnv.width, cnv.height )
+
+  for (i = 1; i < imageData.height - 1; i++) {
+    for (j = 1; j < imageData.width - 1; j++) {
+
+      var pixel = parseInt(j + imageData.width * i) * 4
+
+      for (k = 0; k < 3; k++) {
+
+        var totalSum = imageData.data[(parseInt((j-1) + imageData.width * (i-1)) * 4)+k] + imageData.data[(parseInt((j-1) + imageData.width * i) * 4)+k] + imageData.data[(parseInt((j-1) + imageData.width * (i+1)) * 4)+k] + imageData.data[(parseInt(j + imageData.width * (i-1)) * 4)+k] + imageData.data[(parseInt(j + imageData.width * i) * 4)+k] + imageData.data[(parseInt(j + imageData.width * (i+1)) * 4)+k] + imageData.data[(parseInt((j+1) + imageData.width * (i-1)) * 4)+k] + imageData.data[(parseInt((j+1) + imageData.width * i) * 4)+k] + imageData.data[(parseInt((j+1) + imageData.width * (i+1)) * 4)+k]
+
+        var median = parseInt( totalSum / 9 )
+        imageData.data[pixel+k] = median
 
       }
+
     }
-    
-
-    ctx.putImageData(pixels, 0, 0, 0, 0, pixels.width, pixels.height)
-    console.log("averagingFilter")
-    return cnv.toDataURL()
-
-  } 
-
-  function contrast( cnv, ctx ) {
-
-    let pixels = ctx.getImageData( 0, 0, cnv.width, cnv.height )
-  
-    for (i = 0; i < pixels.height; i++) {
-      for (j = 0; j < pixels.width; j++) {
-
-          let pixel = parseInt(j + pixels.width * i) * 4
-
-          let contrM = pixels.data[pixel] + pixels.data[pixel] * 10 / 100
-          let contrm = pixels.data[pixel] - pixels.data[pixel] * 10 / 100
-
-          if (contrM > 255) contrM = 255
-          if (contrm < 0) contrm = 0
-          if (pixels.data[pixel] < 127) pixels.data[pixel] = contrm
-          else pixels.data[pixel] = contrM
-
-      }
-    }
-    
-    ctx.putImageData(pixels, 0, 0, 0, 0, pixels.width, pixels.height)
-    console.log("Contrast")
-    return cnv.toDataURL()
   }
-
-  function medianFilter( cnv, ctx ) {
   
-    let pixels = ctx.getImageData( 0, 0, cnv.width, cnv.height )
-  
-    for (i = 1; i < pixels.height - 1; i++) {
-      for (j = 1; j < pixels.width - 1; j++) {
 
-          let pixel = parseInt((j-1) + pixels.width * (i-1)) * 4
-          let array = []
-          
-          array[0] = pixels.data[parseInt((j-1) + pixels.width * (i-1)) * 4]
-          array[1] = pixels.data[parseInt((j-1) + pixels.width * i) * 4]
-          array[2] = pixels.data[parseInt((j-1) + pixels.width * (i+1)) * 4]
-          array[3] = pixels.data[parseInt(j + pixels.width * (i-1)) * 4]
-          array[4] = pixels.data[parseInt(j + pixels.width * i) * 4]
-          array[5] = pixels.data[parseInt(j + pixels.width * (i+1)) * 4]
-          array[6] = pixels.data[parseInt((j+1) + pixels.width * (i-1)) * 4]
-          array[7] = pixels.data[parseInt((j+1) + pixels.width * i) * 4]
-          array[8] = pixels.data[parseInt((j+1) + pixels.width * (i+1)) * 4]
+  ctx.putImageData(imageData, 0, 0, 0, 0, imageData.width, imageData.height)
+  console.log("averagingFilter")
+  return cnv.toDataURL()
 
-          array.sort()
-          pixels.data[pixel] = array[4]
+} 
+
+function contrast( cnv, ctx ) {
+
+  var imageData = ctx.getImageData( 0, 0, cnv.width, cnv.height )
+
+  for (i = 0; i < imageData.height; i++) {
+    for (j = 0; j < imageData.width; j++) {
+
+      var pixel = parseInt(j + imageData.width * i) * 4
+
+      for (k = 0; k < 3; k++) {
+
+        var contrM = imageData.data[pixel+k] + imageData.data[pixel+k] * 10 / 100
+        var contrm = imageData.data[pixel+k] - imageData.data[pixel+k] * 10 / 100
+
+        if (contrM > 255) contrM = 255
+        if (contrm < 0) contrm = 0
+        if (imageData.data[pixel+k] < 127) imageData.data[pixel+k] = contrm
+        else imageData.data[pixel+k] = contrM
 
       }
     }
-    
-
-    ctx.putImageData(pixels, 0, 0, 0, 0, pixels.width, pixels.height)
-    console.log("MedianFilter")
-    return cnv.toDataURL()
-
   }
+  
+  ctx.putImageData(imageData, 0, 0, 0, 0, imageData.width, imageData.height)
+  console.log("Contrast")
+  return cnv.toDataURL()
+}
+
+function medianFilter( cnv, ctx ) {
+
+  imageData = ctx.getImageData( 0, 0, cnv.width, cnv.height )
+
+  for (i = 1; i < imageData.height - 1; i++) {
+    for (j = 1; j < imageData.width - 1; j++) {
+
+      var pixel = parseInt((j-1) + imageData.width * (i-1)) * 4
+      var array = []
+
+      for(k = 0; k<3; k++) {
+        array[0] = imageData.data[(parseInt((j-1) + imageData.width * (i-1)) * 4)+k]
+        array[1] = imageData.data[(parseInt((j-1) + imageData.width * i) * 4)+k]
+        array[2] = imageData.data[(parseInt((j-1) + imageData.width * (i+1)) * 4)+k]
+        array[3] = imageData.data[(parseInt(j + imageData.width * (i-1)) * 4)+k]
+        array[4] = imageData.data[(parseInt(j + imageData.width * i) * 4)+k]
+        array[5] = imageData.data[(parseInt(j + imageData.width * (i+1)) * 4)+k]
+        array[6] = imageData.data[(parseInt((j+1) + imageData.width * (i-1)) * 4)+k]
+        array[7] = imageData.data[(parseInt((j+1) + imageData.width * i) * 4)+k]
+        array[8] = imageData.data[(parseInt((j+1) + imageData.width * (i+1)) * 4)+k]
+
+        array.sort()
+        imageData.data[pixel+k] = array[4]
+      }
+    }
+  }
+  
+
+  ctx.putImageData(imageData, 0, 0, 0, 0, imageData.width, imageData.height)
+  console.log("MedianFilter")
+  return cnv.toDataURL()
+
+}
