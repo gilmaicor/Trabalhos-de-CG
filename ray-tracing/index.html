@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ray Tracer</title>
+  </head>
+
+  <body onload="main()">
+    <canvas id="canvas" width="600" height="500">
+    </canvas><br>
+
+    luzes: 
+    <input id="luz1" type="checkbox" value="luz1" checked>Luz Longe
+    <input id="luz2" type="checkbox" value="luz2">Luz Perto
+    <br>
+    objects:
+    <input id="esferaVermelha" type="checkbox" checked>Esfera Vermelha
+    <input id="esferaAzul" type="checkbox" checked>Esfera Azul
+    <input id="esferaVerde" type="checkbox" checked>Esfera Verde
+    <input id="planoAmarelo" type="checkbox" checked>Plano Amarelo
+    <input id="planoVerde" type="checkbox" checked>Plano Verde
+    <br>
+    <button onclick="setup_scene()">Renderizar</button>
+
+    <script src="gl-matrix.js"></script>
+    <script src="ray_tracer.js"></script>
+  </body>
+</html>
