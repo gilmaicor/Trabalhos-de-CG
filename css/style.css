@@ -13,11 +13,7 @@ canvas {
   justify-content: center;
   align-items: center;
   text-align: center;
-}
-
-img, canvas {
-  border: 5px;
-  border-color: blue;
+  margin-right: 10px;
 }
 
 .top {

@@ -6610,7 +6610,11 @@
 				var hex = m[ 1 ];
 				var size = hex.length;
 
-				if ( size === 3 ) {
+				if ( size <= 3 ) {
+
+					while ( hex.length < 3 ) {
+						hex += '0';
+					}
 
 					// #ff0
 					this.r = parseInt( hex.charAt( 0 ) + hex.charAt( 0 ), 16 ) / 255;
@@ -6619,7 +6623,11 @@
 
 					return this;
 
-				} else if ( size === 6 ) {
+				} else if ( size <= 6 ) {
+
+					while ( hex.length < 6 ) {
+						hex += '0';
+					}
 
 					// #ff0000
 					this.r = parseInt( hex.charAt( 0 ) + hex.charAt( 1 ), 16 ) / 255;

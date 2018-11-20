@@ -34,8 +34,15 @@ function init() {
 	// color
 
 	function color() {
-		let value = Math.floor(Math.random() * (16000000 - 500)) + 500;
-		return '#' + value.toString(16);
+		var value = Math.floor(Math.random() * 16777215);
+		value = value.toString(16);
+		// while ( value.length <= 6) {
+		// 	if (value.length == 6) {
+				return '#' + value;
+		// 	} else {
+		// 		value = value + '0';
+		// 	}
+		// }
 	}
 
 	// particles

@@ -3,23 +3,33 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Ray Tracer</title>
+    <title>Javascript Ray Tracer</title>
   </head>
 
   <body onload="main()">
-    <canvas id="canvas" width="600" height="500">
+    <h1>Javascript Ray Tracer</h1>
+    <canvas id="canvas" width="600" height="600">
+    Please use a browser that supports "canvas"
     </canvas><br>
 
-    luzes: 
-    <input id="luz1" type="checkbox" value="luz1" checked>Luz Longe
-    <input id="luz2" type="checkbox" value="luz2">Luz Perto
+    recursion depth: 
+    <select id="depth">
+      <option value=0>0
+      <option value=1>1
+      <option value=2>2
+      <option value=3>3
+      <option value=4 selected="selected">4
+    </select><br>
+    lights: 
+    <input id="light1" type="checkbox" value="light1" checked>Light near
+    <input id="light2" type="checkbox" value="light2" checked>Light far
     <br>
     objects:
-    <input id="esferaVermelha" type="checkbox" checked>Esfera Vermelha
-    <input id="esferaAzul" type="checkbox" checked>Esfera Azul
-    <input id="esferaVerde" type="checkbox" checked>Esfera Verde
-    <input id="planoAmarelo" type="checkbox" checked>Plano Amarelo
-    <input id="planoVerde" type="checkbox" checked>Plano Verde
+    <input id="redsphere" type="checkbox" checked>Esfera Vermelha
+    <input id="bluesphere" type="checkbox" checked>Esfera Azul
+    <input id="greensphere" type="checkbox" checked>Esfera Verde
+    <input id="yellowplane" type="checkbox" checked>Plano Amarelo
+    <input id="greyplane" type="checkbox" checked>Plano Cinza
     <br>
     <button onclick="setup_scene()">Renderizar</button>
 
