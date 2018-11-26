@@ -19,19 +19,21 @@
       <option value=3>3
       <option value=4 selected="selected">4
     </select><br>
-    lights: 
-    <input id="light1" type="checkbox" value="light1" checked>Light near
-    <input id="light2" type="checkbox" value="light2" checked>Light far
+    luzs: 
+    <input id="luz1" type="checkbox" value="luz1" checked>Luz longe
+    <input id="luz2" type="checkbox" value="luz2" checked>Luz Perto
     <br>
     objects:
-    <input id="redsphere" type="checkbox" checked>Esfera Vermelha
-    <input id="bluesphere" type="checkbox" checked>Esfera Azul
-    <input id="greensphere" type="checkbox" checked>Esfera Verde
-    <input id="yellowplane" type="checkbox" checked>Plano Amarelo
-    <input id="greyplane" type="checkbox" checked>Plano Cinza
+    <input id="esfVermelha" type="checkbox" checked>Esfera Vermelha
+    <input id="esfazul" type="checkbox" checked>Esfera Azul
+    <input id="esfVerde" type="checkbox" checked>Esfera Verde
+    <input id="triVerde" type="checkbox" checked>Triangulo Verde
+    <input id="planoAmarelo" type="checkbox" checked>Plano Amarelo
+    <input id="planoCinza" type="checkbox" checked>Plano Cinza
     <br>
     <button onclick="setup_scene()">Renderizar</button>
 
+    <script src="lightgl.js"></script>
     <script src="gl-matrix.js"></script>
     <script src="ray_tracer.js"></script>
   </body>
