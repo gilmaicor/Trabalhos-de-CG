@@ -16,4 +16,4 @@
 
 ## Quer ver em ação?
 
-Acesse [esse link](https://gilmaicor.github.io/Trabalhos-de-CG/)
+Acesse [esse link](https://gilmaicor.github.io/praticas-de-CG/)
