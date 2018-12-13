@@ -1,6 +1,6 @@
 function gammaCorrection( cnv, ctx ) {
   
-  var gamma = 0.5
+  var gamma = 1.5
   var correction = 1 / gamma
 
   var imageData = ctx.getImageData( 0, 0, cnv.width, cnv.height )
